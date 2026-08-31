@@ -48,16 +48,3 @@ h1{
     font-size:18px;
     font-weight:bold;
 }
-/* アニメーション */
-@keyframes move {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(100px);
-    }
-}
-
-.card {
-    animation: move 2s;
-}
