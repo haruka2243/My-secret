@@ -89,7 +89,7 @@ function displayCharacters(title, characters) {
                 <div class="detail-tab">
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
-                      <p>属性：${attribute}</p>
+                    <p>属性：${attribute}</p>
                 </div>
 
             </div>
