@@ -76,8 +76,8 @@ function displayCharacters(title, characters) {
         const name = character[0];
         const image = character[1];
         const rarity = character[2];
-
         const attribute = character[3];
+        const weapon = character[4];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
@@ -90,6 +90,7 @@ function displayCharacters(title, characters) {
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
                     <p>属性：${attribute}</p>
+                    <p>武器：${weapon}</p>
                 </div>
 
             </div>
