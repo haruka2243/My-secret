@@ -27,11 +27,13 @@ h2{
 
 /* キャラクターカード */
 .card{
+    position:relative;
     width:180px;
     background:#222;
     border-radius:12px;
     padding:10px;
     text-align:center;
+    cursor:pointer;
     transition:0.3s;
 }
 
@@ -55,26 +57,17 @@ h2{
     font-weight:bold;
 }
 
+/* セクションタイトル */
 .section-title{
     width:100%;
     text-align:center;
     margin-top:40px;
 }
 
-.card{
-    position:relative;
-    width:160px;
-    cursor:pointer;
-}
-
-.card img{
-    width:160px;
-    height:220px;
-    object-fit:cover;
-}
-
+/* クリックしたときに出る詳細タブ */
 .detail-tab{
     display:none;
+
     position:absolute;
     top:5px;
     left:5px;
@@ -85,8 +78,98 @@ h2{
 
     padding:8px;
     border-radius:8px;
+
+    z-index:10;
 }
 
+/* 詳細タブを表示 */
+.detail-tab.show{
+    display:block;
+}/* ページ全体 */
+body{
+    background:#111;
+    color:white;
+    font-family:Arial,sans-serif;
+    margin:20px;
+}
+
+/* タイトル */
+h1{
+    text-align:center;
+}
+
+h2{
+    width:100%;
+    text-align:center;
+    margin-top:40px;
+}
+
+/* キャラクター一覧 */
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+/* キャラクターカード */
+.card{
+    position:relative;
+    width:180px;
+    background:#222;
+    border-radius:12px;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* カードにマウスを乗せたとき */
+.card:hover{
+    transform:scale(1.05);
+}
+
+/* キャラクター画像 */
+.card img{
+    width:160px;
+    height:220px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+/* キャラクター名 */
+.name{
+    margin-top:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* セクションタイトル */
+.section-title{
+    width:100%;
+    text-align:center;
+    margin-top:40px;
+}
+
+/* クリックしたときに出る詳細タブ */
+.detail-tab{
+    display:none;
+
+    position:absolute;
+    top:5px;
+    left:5px;
+    right:5px;
+
+    background:rgba(0,0,0,0.85);
+    color:white;
+
+    padding:8px;
+    border-radius:8px;
+
+    z-index:10;
+}
+
+/* 詳細タブを表示 */
 .detail-tab.show{
     display:block;
 }
