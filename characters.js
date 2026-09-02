@@ -75,14 +75,33 @@ function displayCharacters(title, characters) {
 
         const name = character[0];
         const image = character[1];
+        const rarity = character[2];
 
         gallery.innerHTML += `
-            <div class="card">
+            <div class="card" onclick="showDetail(this)">
+                
                 <img src="${image}" alt="${name}">
+                
                 <div class="name">${name}</div>
+
+                <div class="detail-tab">
+                    <h3>${name}</h3>
+                    <p>レア度：${"★".repeat(rarity)}</p>
+                </div>
+
             </div>
         `;
     });
+}
+
+
+// 詳細タブを表示・非表示
+function showDetail(card) {
+
+    const detail = card.querySelector(".detail-tab");
+
+    detail.classList.toggle("show");
+
 }
 
 
