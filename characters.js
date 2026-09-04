@@ -4,7 +4,7 @@ const characters = [
     ["今汐", "今汐.webp", 5, "回折", "長刃", "歳華調和"],
     ["長離", "長離.webp", 5, "焦熱", "迅刀", "赫く燃ゆる流光"],
     ["折枝", "折枝.webp", 5, "凝縮", "増幅器", "氷華の雅印"],
-    ["相里要", "相里要.webp", 5, "電導", "手甲", "	万端の枢機"],
+    ["相里要", "相里要.webp", 5, "電導", "手甲", "万端の枢機"],
     ["ショアキーパー", "ショアキーパー.webp", 5, "回折", "増幅器", "星々のコンチェルト"],
     ["ツバキ", "ツバキ.webp", 5, "消滅", "迅刀", "春裁ち"],
     ["カルロッタ", "カルロッタ.webp", 5, "凝縮", "拳銃", "ラストダンス"],
@@ -79,6 +79,8 @@ function displayCharacters(title, characters) {
         const attribute = character[3];
         const weapon = character[4];
         const mochiWeapon = character[5];
+        //const ??? = character[6];
+        //const ??? = character[7];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
