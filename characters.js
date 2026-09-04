@@ -93,8 +93,8 @@ function displayCharacters(title, characters) {
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
                     <p>属性：${attribute}</p>
-                    <p>武器：${weapon}</p>
-                    <p>餅武器：${mochiWeapon}</p>
+                    <p>武器： ${weapon}</p>
+                    <p> 餅武器：<br>${mochiWeapon}</p>
                 </div>
 
             </div>
