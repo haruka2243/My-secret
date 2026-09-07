@@ -125,9 +125,16 @@ function showWeapon(event, weaponName, image) {
         .closest(".detail-tab")
         .querySelector(".weapon-image");
 
-    weaponImage.innerHTML = `
-        <img src="${image}" alt="武器">
-    `;
+    // 画像が表示されていたら消す
+    if (weaponImage.innerHTML !== "") {
+        weaponImage.innerHTML = "";
+    }
+    // 表示されていなければ表示する
+    else {
+        weaponImage.innerHTML = `
+            <img src="${image}" alt="武器">
+        `;
+    }
 }
 
 // ★5 → ★4の順番で表示
