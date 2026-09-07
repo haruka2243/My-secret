@@ -95,6 +95,8 @@ function displayCharacters(title, characters) {
                     <p>属性：${attribute}</p>
                     <p>武器：<span class="weapon-name" onclick="showWeapon(event, '${weaponImage}')">${weapon}</span></p>
                     <p>餅武器：<span class="weapon-name" onclick="showWeapon(event, '${mochiWeaponImage}')">${mochiWeapon}</span></p>
+
+                    <div class="weapon-image" id="weapon-image"></div>
                 </div>
 
             </div>
