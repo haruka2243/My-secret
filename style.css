@@ -98,10 +98,18 @@ h2{
     right:0;
     z-index:20;
     text-align:center;
+
+    pointer-events:none;
 }
 
 .weapon-image img{
     width:120px;
     height:auto;
     object-fit:contain;
+}
+
+.weapon-name{
+    position:relative;
+    z-index:30;
+    cursor:pointer;
 }
