@@ -45,7 +45,7 @@ h2{
 }
 
 /* キャラクター画像 */
-.card img{
+.card > img{
     width:160px;
     height:220px;
     object-fit:cover;
