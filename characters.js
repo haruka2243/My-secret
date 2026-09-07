@@ -79,8 +79,7 @@ function displayCharacters(title, characters) {
         const attribute = character[3];
         const weapon = character[4];
         const mochiWeapon = character[5];
-        const weaponImage = character[6];
-        const mochiWeaponImage = character[7];
+        const mochiWeaponImage = character[6];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
@@ -92,11 +91,14 @@ function displayCharacters(title, characters) {
                 <div class="detail-tab">
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
-                    <p>属性：${attribute}</p>
-                    <p>武器：<span class="weapon-name" onclick="showWeapon(event, '${weaponImage}')">${weapon}</span></p>
-                    <p>餅武器：<span class="weapon-name" onclick="showWeapon(event, '${mochiWeaponImage}')">${mochiWeapon}</span></p>
+                    <p>武器：${weapon}</p>
+                    <p>餅武器：
+                        <span class="weapon-name" onclick="showWeapon(event, this, '${mochiWeaponImage}')">
+                            ${mochiWeapon}
+                        </span>
+                    </p>
 
-                    <div class="weapon-image" id="weapon-image"></div>
+                    <div class="weapon-image"></div>
                 </div>
 
             </div>
@@ -114,16 +116,17 @@ function showDetail(card) {
 
 }
 
-function showWeapon(event, image) {
+function showWeapon(event, weaponName, image) {
     event.stopPropagation();
 
-    const weaponImage = document.getElementById("weapon-image");
+    const weaponImage = weaponName
+        .closest(".detail-tab")
+        .querySelector(".weapon-image");
 
     weaponImage.innerHTML = `
         <img src="${image}" alt="武器">
     `;
 }
-
 
 // ★5 → ★4の順番で表示
 displayCharacters("★5 キャラクター", fiveStar);
