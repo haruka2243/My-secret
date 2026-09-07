@@ -79,8 +79,8 @@ function displayCharacters(title, characters) {
         const attribute = character[3];
         const weapon = character[4];
         const mochiWeapon = character[5];
-        //const ??? = character[6];
-        //const ??? = character[7];
+        const weaponImage = character[6];
+        const mochiWeaponImage = character[7];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
@@ -93,8 +93,8 @@ function displayCharacters(title, characters) {
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
                     <p>属性：${attribute}</p>
-                    <p>武器：${weapon}</p>
-                    <p>餅武器：<br>${mochiWeapon}</p>
+                    <p>武器：<span class="weapon-name" onclick="showWeapon(event, '${weaponImage}')">${weapon}</span></p>
+                    <p>餅武器：<span class="weapon-name" onclick="showWeapon(event, '${mochiWeaponImage}')">${mochiWeapon}</span></p>
                 </div>
 
             </div>
@@ -110,6 +110,16 @@ function showDetail(card) {
 
     detail.classList.toggle("show");
 
+}
+
+function showWeapon(event, image) {
+    event.stopPropagation();
+
+    const weaponImage = document.getElementById("weapon-image");
+
+    weaponImage.innerHTML = `
+        <img src="${image}" alt="武器">
+    `;
 }
 
 
