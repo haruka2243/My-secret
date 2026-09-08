@@ -80,13 +80,16 @@ function displayCharacters(title, characters) {
         const weapon = character[4];
         const mochiWeapon = character[5];
         const mochiWeaponImage = character[6];
+        const characterLargeImage = character[7];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
                 
                 <img src="${image}" alt="${name}">
                 
-                <div class="name">${name}</div>
+                <div class="name" onclick="showCharacterImage(event, '${characterLargeImage}')">
+                    ${name}
+                </div>
 
                 <div class="detail-tab">
                     <h3>${name}</h3>
@@ -101,8 +104,10 @@ function displayCharacters(title, characters) {
 
                     <div class="weapon-image"></div>
                     ` : ""}
-
                 </div>
+
+                <div class="character-large-image"></div>
+                
             </div>
         `;
     });
@@ -133,6 +138,21 @@ function showWeapon(event, weaponName, image) {
     else {
         weaponImage.innerHTML = `
             <img src="${image}" alt="武器">
+        `;
+    }
+}
+
+function showCharacterImage(event, image) {
+    event.stopPropagation();
+
+    const card = event.target.closest(".card");
+    const largeImage = card.querySelector(".character-large-image");
+
+    if (largeImage.innerHTML !== "") {
+        largeImage.innerHTML = "";
+    } else {
+        largeImage.innerHTML = `
+            <img src="${image}" alt="キャラクター画像">
         `;
     }
 }
