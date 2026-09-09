@@ -124,11 +124,12 @@ h2{
 
     display:flex;
     justify-content:center;
+
+    pointer-events:none;
 }
 
 .character-large-image img{
     width:600px;
     height:auto;
-
     border-radius:10px;
 }
