@@ -39,6 +39,11 @@ h2{
     transition:0.3s;
 }
 
+/* 大きなキャラ画像を表示しているカードを最前面にする */
+.card.large-open{
+    z-index:1000;
+}
+
 /* カードにマウスを乗せたとき */
 .card:hover{
     transform:scale(1.05);
