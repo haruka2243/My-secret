@@ -149,11 +149,16 @@ function showCharacterImage(event, image) {
     const largeImage = card.querySelector(".character-large-image");
 
     if (largeImage.innerHTML !== "") {
+        // 画像を消す
         largeImage.innerHTML = "";
+        card.classList.remove("large-open");
     } else {
+        // 画像を表示
         largeImage.innerHTML = `
             <img src="${image}" alt="キャラクター画像">
         `;
+
+        card.classList.add("large-open");
     }
 }
 
