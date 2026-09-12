@@ -77,10 +77,11 @@ function displayCharacters(title, characters) {
         const image = character[1];
         const rarity = character[2];
         const attribute = character[3];
-        const weapon = character[4];
-        const mochiWeapon = character[5];
-        const mochiWeaponImage = character[6];
-        const characterLargeImage = character[7];
+        const attribute = charactr[4];
+        const weapon = character[5];
+        const mochiWeapon = character[6];
+        const mochiWeaponImage = character[7];
+        const characterLargeImage = character[8];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
@@ -94,6 +95,7 @@ function displayCharacters(title, characters) {
                 <div class="detail-tab">
                     <h3>${name}</h3>
                     <p>レア度：${"★".repeat(rarity)}</p>
+                    <p>属性：${attribute}</p>
                     <p>武器：${weapon}</p>
                     ${rarity === 5 ? `
                     <p>餅武器：
