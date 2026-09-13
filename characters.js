@@ -77,11 +77,10 @@ function displayCharacters(title, characters) {
         const image = character[1];
         const rarity = character[2];
         const attribute = character[3];
-        const attribute = charactr[4];
-        const weapon = character[5];
-        const mochiWeapon = character[6];
-        const mochiWeaponImage = character[7];
-        const characterLargeImage = character[8];
+        const weapon = character[4];
+        const mochiWeapon = character[5];
+        const mochiWeaponImage = character[6];
+        const characterLargeImage = character[7];
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
