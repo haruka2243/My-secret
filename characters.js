@@ -84,9 +84,9 @@ function displayCharacters(title, characters) {
 
         gallery.innerHTML += `
             <div class="card" onclick="showDetail(this)">
-                
+        
                 <img src="${image}" alt="${name}">
-                
+        
                 <div class="name" onclick="showCharacterImage(event, '${characterLargeImage}')">
                     ${name}
                 </div>
@@ -96,6 +96,7 @@ function displayCharacters(title, characters) {
                     <p>レア度：${"★".repeat(rarity)}</p>
                     <p>属性：${attribute}</p>
                     <p>武器：${weapon}</p>
+
                     ${rarity === 5 ? `
                     <p>餅武器：
                         <span class="weapon-name" onclick="showWeapon(event, this, '${mochiWeaponImage}')">
@@ -106,9 +107,7 @@ function displayCharacters(title, characters) {
                     <div class="weapon-image"></div>
                     ` : ""}
                 </div>
-
-                <div class="character-large-image"></div>
-                
+        
             </div>
         `;
     });
