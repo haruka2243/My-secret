@@ -146,21 +146,20 @@ function showWeapon(event, weaponName, image) {
 function showCharacterImage(event, image) {
     event.stopPropagation();
 
-    const card = event.target.closest(".card");
-    const largeImage = card.querySelector(".character-large-image");
+    const modal = document.getElementById("imageModal");
+    const largeImage = document.getElementById("largeCharacterImage");
 
-    if (largeImage.innerHTML !== "") {
-        // 画像を消す
-        largeImage.innerHTML = "";
-        card.classList.remove("large-open");
-    } else {
-        // 画像を表示
-        largeImage.innerHTML = `
-            <img src="${image}" alt="キャラクター画像">
-        `;
+    largeImage.src = image;
 
-        card.classList.add("large-open");
-    }
+    modal.classList.add("show");
+}
+
+function closeCharacterImage() {
+    const modal = document.getElementById("imageModal");
+    const largeImage = document.getElementById("largeCharacterImage");
+
+    modal.classList.remove("show");
+    largeImage.src = "";
 }
 
 // ★5 → ★4の順番で表示
