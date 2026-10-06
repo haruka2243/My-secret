@@ -138,3 +138,66 @@ h2{
     height:auto;
     border-radius:10px;
 }
+
+/* 大きなキャラ画像の全画面表示 */
+.image-modal{
+    display:none;
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+
+    background:rgba(0,0,0,0.9);
+
+    z-index:9999;
+
+    justify-content:center;
+    align-items:center;
+}
+
+/* 表示状態 */
+.image-modal.show{
+    display:flex;
+}
+
+/* 大きなキャラ画像 */
+.image-modal img{
+    max-width:90vw;
+    max-height:90vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+}
+
+/* ×ボタン */
+.close-button{
+    position:absolute;
+
+    top:20px;
+    right:30px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.15);
+    color:white;
+
+    font-size:36px;
+    line-height:50px;
+
+    cursor:pointer;
+
+    z-index:10000;
+}
+
+/* ×ボタンにマウスを乗せたとき */
+.close-button:hover{
+    background:rgba(255,255,255,0.3);
+}
