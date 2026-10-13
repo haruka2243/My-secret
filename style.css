@@ -176,3 +176,44 @@ h2{
 .close-button:hover{
     background:rgba(255,255,255,0.3);
 }
+
+/* パスワード画面 */
+#password-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #111;
+    color: white;
+}
+
+/* 入力ボックス */
+.password-box {
+    width: 320px;
+    max-width: 85vw;
+    padding: 25px;
+    border-radius: 12px;
+    background: #222;
+    text-align: center;
+}
+
+.password-box input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.password-box button {
+    padding: 10px 24px;
+    cursor: pointer;
+}
+
+#password-error {
+    color: #ff7777;
+}
+
