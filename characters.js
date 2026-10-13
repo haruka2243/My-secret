@@ -164,3 +164,21 @@ function closeCharacterImage() {
 // ★5 → ★4の順番で表示
 displayCharacters("★5 キャラクター", fiveStar);
 displayCharacters("★4 キャラクター", fourStar);
+
+// 簡易パスワード認証
+const SITE_PASSWORD = "1234"; // 好きなパスワードに変更
+
+document.getElementById("password-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const input = document.getElementById("password-input");
+    const error = document.getElementById("password-error");
+
+    if (input.value === SITE_PASSWORD) {
+        document.getElementById("password-screen").remove();
+    } else {
+        error.textContent = "パスワードが違います。";
+        input.value = "";
+        input.focus();
+    }
+});
