@@ -165,8 +165,11 @@ function closeCharacterImage() {
 displayCharacters("★5 キャラクター", fiveStar);
 displayCharacters("★4 キャラクター", fourStar);
 
- // 使用できるパスワード一覧
-const SITE_PASSWORDS = "705131225";
+// 使用できるパスワード一覧
+const SITE_PASSWORDS = [
+    "705131225",
+    "885322062"
+];
 
 document.getElementById("password-form").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -174,7 +177,7 @@ document.getElementById("password-form").addEventListener("submit", function(eve
     const input = document.getElementById("password-input");
     const error = document.getElementById("password-error");
 
-    if (input.value === SITE_PASSWORD) {
+    if (SITE_PASSWORDS.includes(input.value)) {
         document.getElementById("password-screen").remove();
     } else {
         error.textContent = "パスワードが違います。";
