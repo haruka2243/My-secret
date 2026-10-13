@@ -165,8 +165,11 @@ function closeCharacterImage() {
 displayCharacters("★5 キャラクター", fiveStar);
 displayCharacters("★4 キャラクター", fourStar);
 
-// 簡易パスワード認証
-const SITE_PASSWORD = "705131225"; // 好きなパスワードに変更
+ // 使用できるパスワード一覧
+const SITE_PASSWORDS = [
+    "705131225",
+    "885322062"
+];
 
 document.getElementById("password-form").addEventListener("submit", function(event) {
     event.preventDefault();
