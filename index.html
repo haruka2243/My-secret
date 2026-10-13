@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,6 +10,26 @@
 </head>
 
 <body>
+
+<!-- パスワード入力画面 -->
+<div id="password-screen">
+    <div class="password-box">
+        <h2>鳴潮 キャラクター一覧</h2>
+        <p>閲覧するにはパスワードを入力してください。</p>
+
+        <form id="password-form">
+            <input
+                type="password"
+                id="password-input"
+                placeholder="パスワード"
+                required
+            >
+            <button type="submit">ログイン</button>
+        </form>
+
+        <p id="password-error"></p>
+    </div>
+</div>
 
 <h1>鳴潮 キャラクター一覧</h1>
 
@@ -24,3 +45,4 @@
 
 </body>
 </html>
+```
