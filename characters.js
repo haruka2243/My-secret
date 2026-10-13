@@ -166,9 +166,7 @@ displayCharacters("★5 キャラクター", fiveStar);
 displayCharacters("★4 キャラクター", fourStar);
 
  // 使用できるパスワード一覧
-const SITE_PASSWORDS = [
-    "705131225"
-];
+const SITE_PASSWORDS = "705131225";
 
 document.getElementById("password-form").addEventListener("submit", function(event) {
     event.preventDefault();
