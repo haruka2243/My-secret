@@ -173,7 +173,9 @@ displayCharacters("★4 キャラクター", fourStar);
 
 const SITE_PASSWORDS = [
     "705131225",
-    "885322062"
+    "885322062",
+    "705131225885322062",
+    "885322062705131225"
 ];
 
 document.getElementById("password-form").addEventListener("submit", function(event) {
