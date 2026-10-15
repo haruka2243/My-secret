@@ -66,10 +66,14 @@ const fourStar = characters.filter(character => character[2] === 4);
 // キャラクターを表示する関数
 function displayCharacters(title, characters) {
 
-    // 見出し
+
     gallery.innerHTML += `
-        <h2 class="section-title">${title}</h2>
+        <h2 class="section-title"
+            onclick="showGachaImage(event, '${title}')">
+            ${title}
+        </h2>
     `;
+
 
     // キャラクター表示
     characters.forEach(character => {
@@ -186,3 +190,14 @@ document.getElementById("password-form").addEventListener("submit", function(eve
         input.focus();
     }
 });
+
+function showGachaImage(event, title) {
+    if (title !== "★5 キャラクター") return;
+
+    event.stopPropagation();
+    document.getElementById("gachaModal").classList.add("show");
+}
+
+function closeGachaImage() {
+    document.getElementById("gachaModal").classList.remove("show");
+}
