@@ -195,63 +195,48 @@ function renderCharacters(list) {
 }
 
 // 地域メニューを自動作成
-function addMenuButton(label, callback) {
+function addMenuButton(label, callback, parent = regionMenu) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "nav-link";
     button.textContent = label;
     button.addEventListener("click", callback);
-    regionMenu.appendChild(button);
+    parent.appendChild(button);
 }
 
-// ほかの地域
-Object.keys(characterRegions).forEach(region => {
-    addMenuButton(region, () => showPage("region", region));
-});
-
-// 瑝瓏の開閉ボタン
-const huanglongButton = document.createElement("button");
-huanglongButton.type = "button";
-huanglongButton.className = "nav-link";
-huanglongButton.textContent = "▸ 瑝瓏";
-regionMenu.appendChild(huanglongButton);
-
-// 瑝瓏の区分を入れる場所
+// 瑝瓏の中の区分を入れる場所
 const huanglongSubmenu = document.createElement("div");
 huanglongSubmenu.style.display = "none";
 huanglongSubmenu.style.paddingLeft = "12px";
-regionMenu.appendChild(huanglongSubmenu);
 
-huanglongButton.addEventListener("click", () => {
-    const isOpen = huanglongSubmenu.style.display !== "none";
-    huanglongSubmenu.style.display = isOpen ? "none" : "block";
-    huanglongButton.textContent = isOpen ? "▸ 瑝瓏" : "▾ 瑝瓏";
-});
-
-// 瑝瓏の中の区分
-Object.keys(huanglongRegions).forEach(area => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "nav-link";
-    button.textContent = area;
-    button.addEventListener("click", () => {
-        showPage("huanglong", area);
-    });
-    huanglongSubmenu.appendChild(button);
-});
-
-// 通常の8分類
+// ほかの地域と瑝瓏のメニューを作成
 Object.keys(characterRegions).forEach(region => {
-    addMenuButton(region, () => showPage("region", region));
-});
+    if (region === "瑝瓏") {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "nav-link";
+        button.textContent = "▸ 瑝瓏";
 
-// 瑝瓏の区分
-const huanglongHeading = document.createElement("h3");
-huanglongHeading.textContent = "瑝瓏（一庭六州）";
-regionMenu.appendChild(huanglongHeading);
+        button.addEventListener("click", () => {
+            const isOpen = huanglongSubmenu.style.display === "none";
+            huanglongSubmenu.style.display = isOpen ? "block" : "none";
+            button.textContent = isOpen ? "▾ 瑝瓏" : "▸ 瑝瓏";
+        });
 
-Object.keys(huanglongRegions).forEach(area => {
-    addMenuButton(area, () => showPage("huanglong", area));
+        regionMenu.appendChild(button);
+        regionMenu.appendChild(huanglongSubmenu);
+
+        // 瑝瓏の中の区分を作成
+        Object.keys(characterRegions["瑝瓏"]).forEach(area => {
+            addMenuButton(
+                area,
+                () => showPage("huanglong", area),
+                huanglongSubmenu
+            );
+        });
+    } else {
+        addMenuButton(region, () => showPage("region", region));
+    }
 });
 
 // ページ切り替え
@@ -271,17 +256,17 @@ function showPage(page, region = "") {
 
     if (activeButton) activeButton.classList.add("active");
 
+    
     if (page === "huanglong") {
         pageTitle.textContent = region;
-        const regions = huanglongRegions[region] || [];
-
-        const list = characters.filter(c =>
-            regions.some(r => getRegion(c[0]) === r)
-        );
-
+    
+        const names = characterRegions["瑝瓏"][region] || [];
+        const list = characters.filter(c => names.includes(c[0]));
+    
         renderCharacters(list);
+        return;
     }
-
+    
     if (page === "home") {
         pageTitle.textContent = "キャラクター一覧";
         const description = document.createElement("p");
@@ -392,10 +377,6 @@ function showGachaImage(event, title) {
 function closeGachaImage() {
     document.getElementById("gachaModal").classList.remove("show");
 }
-
-// ★5 → ★4の順番で表示
-displayCharacters("★5 キャラクター", fiveStar);
-displayCharacters("★4 キャラクター", fourStar);
 
 /*
 const SITE_PASSWORDS = [
