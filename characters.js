@@ -66,7 +66,6 @@ const fourStar = characters.filter(c => c[2] === 4);
 
 // 所属地域。必要に応じてキャラクターを追加してね。
 // ここに記載されていないキャラクターは「未分類」になるよ。
-
 const characterRegions = {
     "今州": [
         "忌炎", "吟霖", "今汐", "長離", "相里要",
@@ -90,14 +89,14 @@ const characterRegions = {
 
 // 瑝瓏の一庭六州などの区分
 const huanglongRegions = {
-    "名庭（一庭）": [],
+    "名庭": [],
     "方州": [],
     "詔州": [],
     "越州": [],
     "戎州": [],
     "重州": [],
-    "今州（#1・特殊）": ["今州"],
-    "夢州（#1・特殊）": ["夢州"]
+    "今州": ["今州"],
+    "夢州": ["夢州"]
 };
 
 function getRegion(name) {
@@ -210,20 +209,27 @@ function renderCharacters(list) {
 }
 
 // 地域メニューを自動作成
-const regions = [
-    ...Object.keys(characterRegions),
-    "未分類"
-];
-
-regions.forEach(region => {
+function addMenuButton(label, callback) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "nav-link";
-    button.textContent = region;
-    button.addEventListener("click", () => {
-        showPage("region", region);
-    });
+    button.textContent = label;
+    button.addEventListener("click", callback);
     regionMenu.appendChild(button);
+}
+
+// 通常の8分類
+Object.keys(characterRegions).forEach(region => {
+    addMenuButton(region, () => showPage("region", region));
+});
+
+// 瑝瓏の区分
+const huanglongHeading = document.createElement("h3");
+huanglongHeading.textContent = "瑝瓏（一庭六州）";
+regionMenu.appendChild(huanglongHeading);
+
+Object.keys(huanglongRegions).forEach(area => {
+    addMenuButton(area, () => showPage("huanglong", area));
 });
 
 // ページ切り替え
@@ -242,6 +248,17 @@ function showPage(page, region = "") {
         );
 
     if (activeButton) activeButton.classList.add("active");
+
+    if (page === "huanglong") {
+        pageTitle.textContent = region;
+        const regions = huanglongRegions[region] || [];
+
+        const list = characters.filter(c =>
+            regions.some(r => getRegion(c[0]) === r)
+        );
+
+        renderCharacters(list);
+    }
 
     if (page === "home") {
         pageTitle.textContent = "キャラクター一覧";
