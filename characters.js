@@ -65,38 +65,24 @@ const fiveStar = characters.filter(c => c[2] === 5);
 const fourStar = characters.filter(c => c[2] === 4);
 
 // 所属地域。必要に応じてキャラクターを追加してね。
-// ここに記載されていないキャラクターは「未分類」になるよ。
+// ここに記載されていないキャラクターは「その他」になるよ。
 const characterRegions = {
-    "今州": [
-        "忌炎", "吟霖", "今汐", "長離", "相里要",
-        "淵武", "散華", "白芷", "熾霞", "モルトフィー",
-        "秧秧", "桃祈", "丹瑾", "アールト"
-    ],
-    "ブラックショア": [
-        "ショアキーパー", "ツバキ", "ロココ"
-    ],
-    "リナシータ": [
-        "カルロッタ", "フィービー", "ブラント",
-        "カンタレラ", "ザンニー", "シャコンヌ",
-        "カルテジア", "フローヴァ"
-    ],
+    "瑝瓏": {
+        "名庭": [],
+        "方州": [],
+        "詔州": [],
+        "越州": [],
+        "戎州": [],
+        "重州": [],
+        "今州": [],
+        "夢州": []
+    },
+    "ブラックショア": [],
+    "リナシータ": [],
     "スタートーチ学園": [],
-    "夢州": [],
     "ネオユニオン": [],
     "残星組織": [],
     "その他": []
-};
-
-// 瑝瓏の一庭六州などの区分
-const huanglongRegions = {
-    "名庭": [],
-    "方州": [],
-    "詔州": [],
-    "越州": [],
-    "戎州": [],
-    "重州": [],
-    "今州": ["今州"],
-    "夢州": ["夢州"]
 };
 
 function getRegion(name) {
@@ -217,6 +203,42 @@ function addMenuButton(label, callback) {
     button.addEventListener("click", callback);
     regionMenu.appendChild(button);
 }
+
+// ほかの地域
+Object.keys(characterRegions).forEach(region => {
+    addMenuButton(region, () => showPage("region", region));
+});
+
+// 瑝瓏の開閉ボタン
+const huanglongButton = document.createElement("button");
+huanglongButton.type = "button";
+huanglongButton.className = "nav-link";
+huanglongButton.textContent = "▸ 瑝瓏";
+regionMenu.appendChild(huanglongButton);
+
+// 瑝瓏の区分を入れる場所
+const huanglongSubmenu = document.createElement("div");
+huanglongSubmenu.style.display = "none";
+huanglongSubmenu.style.paddingLeft = "12px";
+regionMenu.appendChild(huanglongSubmenu);
+
+huanglongButton.addEventListener("click", () => {
+    const isOpen = huanglongSubmenu.style.display !== "none";
+    huanglongSubmenu.style.display = isOpen ? "none" : "block";
+    huanglongButton.textContent = isOpen ? "▸ 瑝瓏" : "▾ 瑝瓏";
+});
+
+// 瑝瓏の中の区分
+Object.keys(huanglongRegions).forEach(area => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "nav-link";
+    button.textContent = area;
+    button.addEventListener("click", () => {
+        showPage("huanglong", area);
+    });
+    huanglongSubmenu.appendChild(button);
+});
 
 // 通常の8分類
 Object.keys(characterRegions).forEach(region => {
@@ -407,3 +429,4 @@ function showGachaImage(event, title) {
 function closeGachaImage() {
     document.getElementById("gachaModal").classList.remove("show");
 }
+
