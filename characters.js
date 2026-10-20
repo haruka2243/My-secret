@@ -375,7 +375,7 @@ function closeGachaImage() {
 displayCharacters("★5 キャラクター", fiveStar);
 displayCharacters("★4 キャラクター", fourStar);
 
-
+/*
 const SITE_PASSWORDS = [
     "705131225",
     "885322062",
@@ -395,6 +395,7 @@ document.getElementById("password-form").addEventListener("submit", function(eve
         input.focus();
     }
 });
+*/
 
 function showGachaImage(event, title) {
     if (title !== "★5 キャラクター") return;
