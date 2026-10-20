@@ -31,9 +31,29 @@
     </div>
 </div>
 
-<h1>キャラクター一覧</h1>
+<!-- ヘッダー -->
+<header class="site-header">
+    <button id="menu-button" type="button"
+        aria-label="目次を開く" aria-expanded="false">≡</button>
+    <h1 id="page-title">キャラクター一覧</h1>
+</header>
 
-<div class="gallery" id="gallery"></div>
+<!-- 目次 -->
+<div id="menu-overlay"></div>
+<nav id="side-menu" aria-label="目次">
+    <h2>目次</h2>
+    <button class="nav-link" data-page="home">ホーム</button>
+    <button class="nav-link" data-page="star5">★5 キャラクター</button>
+    <button class="nav-link" data-page="star4">★4 キャラクター</button>
+
+    <h3>国・地域別</h3>
+    <div id="region-menu"></div>
+</nav>
+
+<!-- ページの内容 -->
+<main id="page-content">
+    <div class="gallery" id="gallery"></div>
+</main>
 
 <!-- 大きなキャラ画像表示 -->
 <div class="image-modal" id="imageModal">
