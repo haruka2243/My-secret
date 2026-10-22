@@ -366,22 +366,6 @@ function showPage(page, region = "") {
         return;
     }
         
-    if (page === "category") {
-        const path = region;
-        pageTitle.textContent = path.join(" ＞ ");
-    
-        let data = characterRegions;
-    
-        for (const key of path) {
-            data = data[key];
-        }
-    
-        const names = Array.isArray(data) ? data : [];
-        const list = characters.filter(c => names.includes(c[0]));
-    
-        renderCharacters(list);
-        return;
-    }
 
 }
 
