@@ -264,41 +264,6 @@ function buildRegionMenu(data, parent, path = []) {
 
 buildRegionMenu(characterRegions, regionMenu);
 
-// 瑝瓏の中の区分を入れる場所
-const huanglongSubmenu = document.createElement("div");
-huanglongSubmenu.style.display = "none";
-huanglongSubmenu.style.paddingLeft = "12px";
-
-// ほかの地域と瑝瓏のメニューを作成
-Object.keys(characterRegions).forEach(region => {
-    if (region === "瑝瓏") {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "nav-link";
-        button.textContent = "▸ 瑝瓏";
-
-        button.addEventListener("click", () => {
-            const isOpen = huanglongSubmenu.style.display === "none";
-            huanglongSubmenu.style.display = isOpen ? "block" : "none";
-            button.textContent = isOpen ? "▾ 瑝瓏" : "▸ 瑝瓏";
-        });
-
-        regionMenu.appendChild(button);
-        regionMenu.appendChild(huanglongSubmenu);
-
-        // 瑝瓏の中の区分を作成
-        Object.keys(characterRegions["瑝瓏"]).forEach(area => {
-            addMenuButton(
-                area,
-                () => showPage("huanglong", area),
-                huanglongSubmenu
-            );
-        });
-    } else {
-        addMenuButton(region, () => showPage("region", region));
-    }
-});
-
 // ページ切り替え
 function showPage(page, region = "") {
     setMenuOpen(false);
@@ -315,18 +280,7 @@ function showPage(page, region = "") {
         );
 
     if (activeButton) activeButton.classList.add("active");
-
-    
-    if (page === "huanglong") {
-        pageTitle.textContent = region;
-    
-        const names = characterRegions["瑝瓏"][region] || [];
-        const list = characters.filter(c => names.includes(c[0]));
-    
-        renderCharacters(list);
-        return;
-    }
-    
+        
     if (page === "home") {
         pageTitle.textContent = "キャラクター一覧";
         const description = document.createElement("p");
@@ -365,13 +319,7 @@ function showPage(page, region = "") {
         renderCharacters(fourStar);
         return;
     }
-
-    if (page === "region") {
-        pageTitle.textContent = region;
-        const list = characters.filter(c => getRegion(c[0]) === region);
-        renderCharacters(list);
-    }
-    
+        
     if (page === "category") {
         const path = region;
         pageTitle.textContent = path.join(" ＞ ");
@@ -477,15 +425,3 @@ document.getElementById("password-form").addEventListener("submit", function(eve
     }
 });
 */
-
-function showGachaImage(event, title) {
-    if (title !== "★5 キャラクター") return;
-
-    event.stopPropagation();
-    document.getElementById("gachaModal").classList.add("show");
-}
-
-function closeGachaImage() {
-    document.getElementById("gachaModal").classList.remove("show");
-}
-
