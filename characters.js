@@ -39,8 +39,11 @@ const characters = [
     ["心", "心.webp", 5, "電導", "増幅器", "玉殿に咲き満ちる玄華", "武器画像/玉殿に咲き満ちる玄華.webp", "キャラ画像大/心大.webp"],
     ["鎖瞑", "星5キャラ画像/鎖瞑.webp", 5, "電導", "迅刀", "沈冥", "武器画像/沈冥.webp", "キャラ画像大/鎖瞑大.webp"],
     ["リリー", "リリー.jpeg", 5, "回折", "拳銃", "不明", "武器画像/不明.webp", "キャラ画像大/リリー大.webp"],
-    ["鑑心", "", 5, "", "", ""],
-    ["キャラ名", "キャラ画像", "レア度", "属性", "武器の種類", "キャラ画像大"],
+    ["鑑心", "", 5, "", "", "", "", ""],
+    ["", "", 5, "", "", "", "", ""],
+    ["", "", 5, "", "", "", "", ""],
+    ["", "", 5, "", "", "", "", ""],
+    ["", "", 5, "", "", "", "", ""],
     
     ["淵武", "星4キャラ画像/淵武.webp", 4, "電導", "手甲", "キャラ画像大/淵武大.webp"],
     ["散華", "星4キャラ画像/散華.webp", 4, "凝縮", "迅刀", "キャラ画像大/散華大.webp"],
@@ -63,7 +66,18 @@ const menuButton = document.getElementById("menu-button");
 const menuOverlay = document.getElementById("menu-overlay");
 const regionMenu = document.getElementById("region-menu");
 
+// 恒常★5キャラクター
+const standardFiveStarNames = ["鑑心"];
+
+// ★5キャラクターを限定と恒常に分ける
 const fiveStar = characters.filter(c => c[2] === 5);
+const limitedFiveStar = fiveStar.filter(
+    c => !standardFiveStarNames.includes(c[0])
+);
+const standardFiveStar = fiveStar.filter(
+    c => standardFiveStarNames.includes(c[0])
+);
+
 const fourStar = characters.filter(c => c[2] === 4);
 
 // 所属地域。必要に応じてキャラクターを追加してね。
@@ -300,16 +314,26 @@ function showPage(page, region = "") {
             showGachaImage(event, "★5 キャラクター");
         });
         gallery.appendChild(fiveHeading);
+
+        // 限定★5専用エリア
+    const fiveGrid = document.createElement("div");
+    fiveGrid.className = "character-grid";
     
-        // ★5専用エリア
-        const fiveGrid = document.createElement("div");
-        fiveGrid.className = "character-grid";
+    limitedFiveStar.forEach(c => {
+        fiveGrid.appendChild(createCharacterCard(c));
+    });
     
-        fiveStar.forEach(c => {
-            fiveGrid.appendChild(createCharacterCard(c));
-        });
+    gallery.appendChild(fiveGrid);
     
-        gallery.appendChild(fiveGrid);
+    // 恒常★5専用エリア（限定★5の下の段）
+    const standardGrid = document.createElement("div");
+    standardGrid.className = "character-grid";
+    
+    standardFiveStar.forEach(c => {
+        standardGrid.appendChild(createCharacterCard(c));
+    });
+    
+    gallery.appendChild(standardGrid);  
     
         // ★4の見出し
         const fourHeading = document.createElement("h2");
