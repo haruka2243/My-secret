@@ -283,12 +283,14 @@ function showPage(page, region = "") {
         
     if (page === "home") {
         pageTitle.textContent = "キャラクター一覧";
+    
         const description = document.createElement("p");
         description.className = "page-description";
         description.textContent =
             "≡ メニューからレア度や所属地域を選んでね。";
         gallery.appendChild(description);
-
+    
+        // ★5の見出し
         const fiveHeading = document.createElement("h2");
         fiveHeading.className = "section-title";
         fiveHeading.textContent = "★5 キャラクター";
@@ -296,15 +298,33 @@ function showPage(page, region = "") {
             showGachaImage(event, "★5 キャラクター");
         });
         gallery.appendChild(fiveHeading);
-
-        fiveStar.forEach(c => gallery.appendChild(createCharacterCard(c)));
-
+    
+        // ★5専用エリア
+        const fiveGrid = document.createElement("div");
+        fiveGrid.className = "character-grid";
+    
+        fiveStar.forEach(c => {
+            fiveGrid.appendChild(createCharacterCard(c));
+        });
+    
+        gallery.appendChild(fiveGrid);
+    
+        // ★4の見出し
         const fourHeading = document.createElement("h2");
         fourHeading.className = "section-title";
         fourHeading.textContent = "★4 キャラクター";
         gallery.appendChild(fourHeading);
-
-        fourStar.forEach(c => gallery.appendChild(createCharacterCard(c)));
+    
+        // ★4専用エリア
+        const fourGrid = document.createElement("div");
+        fourGrid.className = "character-grid";
+    
+        fourStar.forEach(c => {
+            fourGrid.appendChild(createCharacterCard(c));
+        });
+    
+        gallery.appendChild(fourGrid);
+    
         return;
     }
 
