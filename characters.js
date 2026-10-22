@@ -68,25 +68,44 @@ const fourStar = characters.filter(c => c[2] === 4);
 // ここに記載されていないキャラクターは「その他」になるよ。
 const characterRegions = {
     "瑝瓏": {
-        "名庭": [],
-        "今州": ["忌炎", "吟霖", "今汐", "長離", "折枝", "相里要"],
-        "夢州": ["秧秧・玄翎", "穂穂", "清宵", "景燃"],
+        "名庭": ["鎖瞑"],
+        "今州": ["忌炎", "吟霖", "今汐", "長離", "折枝", "相里要", "凌陽", "鑑心", "散華", "桃祈"],
+        "夢州": ["秧秧・玄翎", "清宵", "景燃", "心"],
         "詔州": [],
-        "越州": [],
-        "重州": [],
+        "越州": ["灯灯"],
+        "重州": ["仇遠", "釉瑚"],
         "方州": [],
         "戎州": []
     },
-    "ブラックショア": [],
-    "穂波": [],
-    "リナシータ": [],
-    "セブンヒルズ": [],
-    "スタートーチ学園": [],
+
+    "ブラックショア": ["ショアキーパー", "ツバキ"],
+
+    "リナシータ": {
+        "ラグーナ": [
+            "カルロッタ", "ロココ", "フィービー",
+            "ブラント", "カンタレラ", "ザンニー", "シャコンヌ"
+        ],
+        "セブン・ヒルズ": ["オーガスタ", "ユーノ", "ルパ"]
+    },
+
+    "葦ノ原": {
+        "穂波": ["千咲", "緋雪"]
+    },
+
+    "ラハイロイ": {
+        "ロイ一族": ["シグリカ"],
+        "スタートーチ学園": ["エイメス", "ダーニャ"]
+    },
+
     "ネオユニオン": [],
-    "残星組織": [],
-    "コラボ": [],
-    "その他": [],
-    "未実装": []
+    "残星組織": ["フローヴァ"],
+
+    "コラボ": {
+        "サイバーパンク": ["ルーシー", "レベッカ"]
+    },
+
+    "その他（不明）": ["スカー", "謎の女性"],
+    "未実装": ["リリー"]
 };
 
 function getRegion(name) {
@@ -199,7 +218,7 @@ function renderCharacters(list) {
 }
 
 // 地域メニューを自動作成
-function addMenuButton(label, callback, parent = regionMenu) {
+function addMenuButton(label, callback, parent) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "nav-link";
@@ -207,6 +226,43 @@ function addMenuButton(label, callback, parent = regionMenu) {
     button.addEventListener("click", callback);
     parent.appendChild(button);
 }
+
+function buildRegionMenu(data, parent, path = []) {
+    Object.entries(data).forEach(([label, value]) => {
+        const currentPath = [...path, label];
+
+        if (Array.isArray(value)) {
+            addMenuButton(label, () => {
+                showPage("category", currentPath);
+            }, parent);
+        } else {
+            const group = document.createElement("div");
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "nav-link";
+            button.textContent = "▸ " + label;
+
+            const submenu = document.createElement("div");
+            submenu.style.display = "none";
+            submenu.style.paddingLeft = "12px";
+
+            button.addEventListener("click", () => {
+                const isOpen = submenu.style.display === "none";
+                submenu.style.display = isOpen ? "block" : "none";
+                button.textContent = (isOpen ? "▾ " : "▸ ") + label;
+            });
+
+            group.appendChild(button);
+            group.appendChild(submenu);
+            parent.appendChild(group);
+
+            buildRegionMenu(value, submenu, currentPath);
+        }
+    });
+}
+
+buildRegionMenu(characterRegions, regionMenu);
 
 // 瑝瓏の中の区分を入れる場所
 const huanglongSubmenu = document.createElement("div");
@@ -315,6 +371,24 @@ function showPage(page, region = "") {
         const list = characters.filter(c => getRegion(c[0]) === region);
         renderCharacters(list);
     }
+    
+    if (page === "category") {
+        const path = region;
+        pageTitle.textContent = path.join(" ＞ ");
+    
+        let data = characterRegions;
+    
+        for (const key of path) {
+            data = data[key];
+        }
+    
+        const names = Array.isArray(data) ? data : [];
+        const list = characters.filter(c => names.includes(c[0]));
+    
+        renderCharacters(list);
+        return;
+    }
+
 }
 
 // レア度ページのメニューを設定
