@@ -327,3 +327,17 @@ h2{
     border-bottom: 1px solid #555;
     padding-bottom: 10px;
 }
+
+/* ★5・★4のカード表示エリア */
+.character-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+/* 見出しを必ず新しい行にする */
+.section-title {
+    flex-basis: 100%;
+}
